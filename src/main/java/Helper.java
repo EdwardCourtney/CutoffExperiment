@@ -1,5 +1,5 @@
 import java.util.Random;
-public class TestMaker {
+public class Helper {
     public static void shuffle(int[] A){
         Random rand = new Random();
         for (int i = 0; i<A.length; i++){
@@ -44,9 +44,9 @@ public class TestMaker {
                     A[i] = i;
                 }
 
-                for (int i = 0; i<n/20; i++){
-                    int a = rand.nextInt(n/20 + 1);
-                    int b = rand.nextInt(n/20 + 1);
+                for (int i = 0; i<n/10; i++){
+                    int a = rand.nextInt(n);
+                    int b = rand.nextInt(n);
 
                     int temp = A[a];
                     A[a] = A[b];
@@ -55,7 +55,21 @@ public class TestMaker {
                 return A;
             }
         }
-
         return null;
+    }
+
+    public static int[] clone(int[] A){
+        int[] B = new int[A.length];
+        for (int i = 0; i<A.length; i++){
+            B[i] = A[i];
+        }
+        return B;
+    }
+
+    public static void print(int[] A){
+        for (int i = 0; i<A.length; i++){
+            System.out.print(A[i] + " ");
+        }
+        System.out.println();
     }
 }

@@ -1,10 +1,15 @@
-public class Mergesort {
+public class Sort {
     public int CUTOFF;
-    public int[] A = null;
+    public int[] A;
 
-    public Mergesort(int[] A, int CUTOFF){
+    public  long measure(int[] A, int CUTOFF){
         this.A = A;
         this.CUTOFF = CUTOFF;
+
+        long start = System.nanoTime();
+        mergeSort(0, A.length-1);
+        long end = System.nanoTime();
+        return end - start;
     }
 
     //Merge Sort
