@@ -6,7 +6,6 @@ public class Sort {
 
         this.A = A;
         this.CUTOFF = CUTOFF;
-        mergeSort(0, A.length-1);
     }
 
     //Merge Sort
