@@ -1,5 +1,5 @@
 import java.util.Random;
-public class Helper {
+public class ArrayManager {
     public static void shuffle(int[] A){
         Random rand = new Random();
         for (int i = 0; i<A.length; i++){
@@ -14,20 +14,20 @@ public class Helper {
     public static int[] createArray(int n, Type t){
         int[] A = new int[n];
 
-        switch (t) {
+        return switch (t) {
             case RANDOM -> {
                 for (int i = 0; i < n; i++) {
                     A[i] = i;
                 }
                 shuffle(A);
-                return A;
+                yield A;
             }
 
             case SORTED -> {
                 for (int i = 0; i < n; i++) {
                     A[i] = i;
                 }
-                return A;
+                yield A;
             }
 
             case REVERSED -> {
@@ -35,7 +35,7 @@ public class Helper {
                 for (int i = n-1; i>=0; i--){
                     A[j++] = i;
                 }
-                return A;
+                yield A;
             }
 
             case NEARLY -> {
@@ -52,10 +52,9 @@ public class Helper {
                     A[a] = A[b];
                     A[b] = temp;
                 }
-                return A;
+                yield A;
             }
-        }
-        return null;
+        };
     }
 
     public static int[] clone(int[] A){
