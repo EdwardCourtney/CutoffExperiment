@@ -1,8 +1,11 @@
 public class Experiment {
-    public static int WARMUP = 300;
-    public static int MAX_CUTOFF = 40;
-    public static int TRIAL = 5;
+    public static int WARMUP = 50;
+    public static int BIGWARMUP = 500;
+    public static int MAX_CUTOFF = 20;
+    public static int TRIAL = 3;
+    public static int DATASET = 10;
 
+    private static int datasetIndex = 0;
     public static long measureEach(int[] A, int CUTOFF) {
         Sort sort = new Sort(A, CUTOFF);
         long start = System.nanoTime();
@@ -14,6 +17,7 @@ public class Experiment {
     public static void measureSet(int n, Type t){
         int[] original = ArrayManager.createArray(n,t);
         int[] order  = ArrayManager.createArray(MAX_CUTOFF, Type.RANDOM);
+        datasetIndex++;
 
         //Warm up
         for (int i = 0; i<WARMUP; i++){
@@ -28,8 +32,49 @@ public class Experiment {
                 int cutoff = order[i] + 1;
                 long timeNs = measureEach(A, cutoff);
 
-                DataManager.record(n, t, cutoff, trial, timeNs);
+                DataManager.record(n, t, datasetIndex,cutoff, trial, timeNs);
             }
+        }
+
+    }
+
+    public static void measureAll(){
+        //Big warm up
+        int[] warmUpOriginal = ArrayManager.createArray(100000,Type.RANDOM);
+        int[] warmUpOrder  = ArrayManager.createArray(MAX_CUTOFF, Type.RANDOM);
+        for (int i = 0; i<BIGWARMUP; i++){
+            int[] warmUp = ArrayManager.clone(warmUpOriginal);
+            measureEach(warmUp, warmUpOrder[i % MAX_CUTOFF] + 1);
+        }
+
+        //Experiment
+
+        //Random
+        for (int i = 0; i<DATASET; i++){
+            measureSet(1000, Type.RANDOM);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(10000, Type.RANDOM);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(100000, Type.RANDOM);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(1000000, Type.RANDOM);
+        }
+
+        //Nearly
+        for (int i = 0; i<DATASET; i++){
+            measureSet(1000, Type.NEARLY);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(10000, Type.NEARLY);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(100000, Type.NEARLY);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(1000000, Type.NEARLY);
         }
 
     }

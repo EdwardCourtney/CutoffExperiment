@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 public class DataManager {
     public static ArrayList<Long[]> data = new ArrayList<>();
-    public static long datasetIndex = 0;
 
     public static void export(){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("result.csv"))) {
@@ -26,7 +25,7 @@ public class DataManager {
 
     //idType: 1 = RANDOM, 2 = NEARLY, 3 = REVERSED, 4 = SORTED
 
-    public static void record(int size, Type type, int cutoff, int trial, long timeNs){
+    public static void record(int size, Type type, int datasetIndex, int cutoff, int trial, long timeNs){
         long idType = 0;
         switch (type){
             case RANDOM -> idType = 1;
@@ -38,12 +37,11 @@ public class DataManager {
         Long[] observation = new Long[6];
         observation[0] = (long) size;
         observation[1] = idType;
-        observation[2] = datasetIndex;
+        observation[2] = (long) datasetIndex;
         observation[3] = (long) cutoff;
         observation[4] = (long) trial;
         observation[5] = timeNs;
 
-        datasetIndex++;
         data.add(observation);
     }
 }
