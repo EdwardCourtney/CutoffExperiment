@@ -1,7 +1,10 @@
 import java.util.Random;
 public class ArrayManager {
     public static void shuffle(int[] A){
-        Random rand = new Random();
+        shuffle(A, new Random());
+    }
+
+    public static void shuffle(int[] A, Random rand){
         for (int i = 0; i<A.length; i++){
             int j = rand.nextInt(i+1);
 
@@ -12,6 +15,10 @@ public class ArrayManager {
     }
 
     public static int[] createArray(int n, Type t){
+        return createArray(n, t, new Random());
+    }
+
+    public static int[] createArray(int n, Type t, Random rand){
         int[] A = new int[n];
 
         return switch (t) {
@@ -19,7 +26,7 @@ public class ArrayManager {
                 for (int i = 0; i < n; i++) {
                     A[i] = i;
                 }
-                shuffle(A);
+                shuffle(A, rand);
                 yield A;
             }
 
@@ -39,7 +46,6 @@ public class ArrayManager {
             }
 
             case NEARLY -> {
-                Random rand = new Random();
                 for (int i = 0; i < n; i++) {
                     A[i] = i;
                 }
