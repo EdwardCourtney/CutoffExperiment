@@ -1,9 +1,9 @@
 public class Experiment {
-    public static int WARMUP = 50;
+    public static int WARMUP = 30;
     public static int BIGWARMUP = 500;
-    public static int MAX_CUTOFF = 40;
+    public static int MAX_CUTOFF = 150;
     public static int TRIAL = 3;
-    public static int DATASET = 30;
+    public static int DATASET = 20;
 
     private static int datasetIndex = 0;
     public static long measureEach(int[] A, int CUTOFF) {
@@ -27,6 +27,7 @@ public class Experiment {
 
         //Measurement
         for (int trial = 0; trial<TRIAL; trial++){
+            ArrayManager.shuffle(order);
             for (int i = 0; i<MAX_CUTOFF; i++) {
                 int[] A = ArrayManager.clone(original);
                 int cutoff = order[i] + 1;
@@ -77,5 +78,32 @@ public class Experiment {
             measureSet(1000000, Type.NEARLY);
         }
 
+        //Reversed
+        for (int i = 0; i<DATASET; i++){
+            measureSet(1000, Type.REVERSED);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(10000, Type.REVERSED);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(100000, Type.REVERSED);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(1000000, Type.REVERSED);
+        }
+
+        //Sorted
+        for (int i = 0; i<DATASET; i++){
+            measureSet(1000, Type.SORTED);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(10000, Type.SORTED);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(100000, Type.SORTED);
+        }
+        for (int i = 0; i<DATASET; i++){
+            measureSet(1000000, Type.SORTED);
+        }
     }
 }
