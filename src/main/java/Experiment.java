@@ -1,9 +1,9 @@
 public class Experiment {
     public static int WARMUP = 50;
     public static int BIGWARMUP = 500;
-    public static int MAX_CUTOFF = 20;
+    public static int MAX_CUTOFF = 40;
     public static int TRIAL = 3;
-    public static int DATASET = 10;
+    public static int DATASET = 30;
 
     private static int datasetIndex = 0;
     public static long measureEach(int[] A, int CUTOFF) {

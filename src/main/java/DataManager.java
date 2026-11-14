@@ -5,7 +5,7 @@ public class DataManager {
     public static ArrayList<Long[]> data = new ArrayList<>();
 
     public static void export(){
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("result.csv"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("results/result.csv"))) {
             writer.write("size,id_type,dataset,cutoff,trial,time_ns");
             writer.newLine();
             for (int row = 0; row < data.size(); row++){
