@@ -6,8 +6,8 @@ public class Experiment {
     public static int WARMUP = 30;
     public static int BIGWARMUP = 500;
     public static int MAX_CUTOFF = 150;
-    public static int TRIAL = 10;
-    public static int DATASET = 30;
+    public static int TRIAL = 5;
+    public static int DATASET = 15;
 
     private static int datasetIndex = 0;
     private static Random dataRandom = new Random(SEED);
